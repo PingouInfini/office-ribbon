@@ -1,0 +1,88 @@
+/* Layout global */
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-content {
+  padding: 20px;
+  background-color: #f0f0f0;
+  flex-grow: 1;
+}
+
+/* Styles pour simuler les boutons du Ruban Office */
+.ribbon-toolbar {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  align-items: flex-start;
+  padding-top: 2px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 2px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+/* Boutons génériques */
+.ribbon-button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+}
+
+.ribbon-button:hover {
+  background-color: #cde6f7;
+  border-color: #92c0e0;
+}
+
+/* Bouton Large (Icône en haut, texte en bas) */
+.ribbon-button.large {
+  flex-direction: column;
+  height: 65px;
+  min-width: 45px;
+  padding: 5px;
+  margin: 0 2px;
+}
+
+.ribbon-button.large .icon {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.ribbon-button.large .label {
+  font-size: 11px;
+}
+
+/* Bouton Small (Icône à gauche, texte à droite) */
+.ribbon-button.small {
+  flex-direction: row;
+  height: 22px;
+  padding: 0 5px;
+  font-size: 11px;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+/* Bouton Tiny (Juste une icône ou une lettre) */
+.ribbon-button.tiny {
+  width: 24px;
+  height: 24px;
+  margin-right: 2px;
+}

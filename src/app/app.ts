@@ -1,12 +1,41 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+// Import direct depuis les sources locales de la lib
+import {
+  NgRibbonComponent,
+  NgRibbonContextComponent,
+  NgRibbonTabComponent,
+  NgRibbonGroupComponent,
+  NgRibbonSettings
+} from './ng-ribbon/src/public-api';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrls: ['./app.css'],
+  imports: [
+    CommonModule,
+    NgRibbonComponent,
+    NgRibbonContextComponent,
+    NgRibbonTabComponent,
+    NgRibbonGroupComponent
+  ]
 })
 export class App {
-  protected readonly title = signal('office-ribbon');
+  // Configuration obligatoire du ruban
+  public ribbonSettings = new NgRibbonSettings({
+    useContexts: false,
+    mouseWheelTabs: true   // Permet de changer d'onglet avec la molette
+  });
+
+  // Méthode onAction de la sandbox
+  public onAction(actionName: string) {
+    console.log(`Action déclenchée : ${actionName}`);
+  }
+
+  // Méthode pour la sandbox du lanceur de dialogue (la petite flèche en bas à droite du groupe)
+  public openGroupDialog(groupName: string) {
+    alert(`Ouverture des options avancées pour : ${groupName}`);
+  }
 }
