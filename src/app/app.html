@@ -7,13 +7,14 @@
 
         <ng-ribbon-group name="Presse-papiers" [dialogLauncher]="true" (showDialog)="openGroupDialog('Presse-papiers')">
           <div class="ribbon-toolbar">
-            <button class="ribbon-button large" (click)="onAction('Coller')">
+            <button class="ribbon-button large" (click)="onAction('Coller')" title="Coller (Ctrl+V)">
               <span class="icon">📋</span>
               <span class="label">Coller</span>
             </button>
             <div class="column">
-              <button class="ribbon-button small" (click)="onAction('Couper')">✂️ Couper</button>
-              <button class="ribbon-button small" (click)="onAction('Copier')">📄 Copier</button>
+              <button class="ribbon-button small" (click)="onAction('Couper')" title="Couper la sélection (Ctrl+X)">✂️ Couper</button>
+              <button class="ribbon-button small" (click)="onAction('Copier')" title="Copier la sélection (Ctrl+C)">📄 Copier</button>
+              <button class="ribbon-button small" (click)="onAction('Reproduire Format')" title="Reproduire la mise en forme">🖌️ Repr. Format</button>
             </div>
           </div>
         </ng-ribbon-group>
@@ -22,22 +23,38 @@
           <div class="ribbon-toolbar">
             <div class="column">
               <div class="row">
-                <select style="width: 120px;">
+                <select style="width: 120px;" title="Police du texte">
                   <option>Arial</option>
                   <option>Calibri</option>
                   <option>Times New Roman</option>
                 </select>
-                <select style="width: 50px;">
+                <select style="width: 50px;" title="Taille de la police">
                   <option>11</option>
                   <option>12</option>
                   <option>14</option>
                 </select>
               </div>
               <div class="row button-group">
-                <button class="ribbon-button tiny" (click)="onAction('Gras')"><b>G</b></button>
-                <button class="ribbon-button tiny" (click)="onAction('Italique')"><i>I</i></button>
-                <button class="ribbon-button tiny" (click)="onAction('Souligné')"><u>S</u></button>
+                <button class="ribbon-button tiny" (click)="onAction('Gras')" title="Gras (Ctrl+G)"><b>G</b></button>
+                <button class="ribbon-button tiny" (click)="onAction('Italique')" title="Italique (Ctrl+I)"><i>I</i></button>
+                <button class="ribbon-button tiny" (click)="onAction('Souligné')" title="Souligné (Ctrl+S)"><u>S</u></button>
+                <button class="ribbon-button tiny" (click)="onAction('Barré')" title="Barrer le texte">~~</button>
               </div>
+            </div>
+          </div>
+        </ng-ribbon-group>
+
+        <ng-ribbon-group name="Paragraphe" [dialogLauncher]="true" (showDialog)="openGroupDialog('Paragraphe')">
+          <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
+            <div class="row button-group">
+              <button class="ribbon-button tiny" (click)="onAction('Aligner Gauche')" title="Aligner le texte à gauche">◀</button>
+              <button class="ribbon-button tiny" (click)="onAction('Centrer')" title="Centrer le texte">≡</button>
+              <button class="ribbon-button tiny" (click)="onAction('Aligner Droite')" title="Aligner le texte à droite">▶</button>
+              <button class="ribbon-button tiny" (click)="onAction('Justifier')" title="Justifier le texte">⁚</button>
+            </div>
+            <div class="row button-group">
+              <button class="ribbon-button small" (click)="onAction('Puces')" title="Liste à puces">• Liste</button>
+              <button class="ribbon-button small" (click)="onAction('Numérotation')" title="Numérotation">1. Liste</button>
             </div>
           </div>
         </ng-ribbon-group>
@@ -45,24 +62,103 @@
       </ng-ribbon-tab>
 
       <ng-ribbon-tab name="Insertion" [order]="2">
+        <ng-ribbon-group name="Pages">
+          <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
+            <button class="ribbon-button large" (click)="onAction('Page Garde')" title="Insérer une page de garde">
+              <span class="icon">📄</span>
+              <span class="label">Page de Garde</span>
+            </button>
+          </div>
+        </ng-ribbon-group>
+
         <ng-ribbon-group name="Tableaux">
-          <button class="ribbon-button large" (click)="onAction('Insérer Tableau')">
+          <button class="ribbon-button large" (click)="onAction('Insérer Tableau')" title="Insérer un tableau">
             <span class="icon">📅</span>
             <span class="label">Tableau</span>
           </button>
         </ng-ribbon-group>
 
         <ng-ribbon-group name="Illustrations">
-          <button class="ribbon-button large" (click)="onAction('Images')">
+          <button class="ribbon-button large" (click)="onAction('Images')" title="Insérer une image à partir de l'ordinateur">
             <span class="icon">🖼️</span>
             <span class="label">Images</span>
           </button>
-          <button class="ribbon-button large" (click)="onAction('Formes')">
+          <button class="ribbon-button large" (click)="onAction('Formes')" title="Dessiner des formes">
             <span class="icon">🔶</span>
             <span class="label">Formes</span>
           </button>
         </ng-ribbon-group>
+
+        <ng-ribbon-group name="En-têtes et Pieds de page">
+          <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
+            <button class="ribbon-button small" (click)="onAction('En-tête')" title="Ajouter un en-tête">H En-tête</button>
+            <button class="ribbon-button small" (click)="onAction('Pied de page')" title="Ajouter un pied de page">F Pied de page</button>
+            <button class="ribbon-button small" (click)="onAction('Numéro de Page')" title="Insérer un numéro de page"># Num. Page</button>
+          </div>
+        </ng-ribbon-group>
+
       </ng-ribbon-tab>
+
+      <ng-ribbon-tab name="Mise en page" [order]="3">
+
+        <ng-ribbon-group name="Mise en page" [dialogLauncher]="true" (showDialog)="openGroupDialog('Mise en page')">
+          <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
+            <button class="ribbon-button large" (click)="onAction('Marges')" title="Définir les marges du document">
+              <span class="icon">📐</span>
+              <span class="label">Marges</span>
+            </button>
+            <button class="ribbon-button large" (click)="onAction('Orientation')" title="Changer l'orientation de la page (Portrait/Paysage)">
+              <span class="icon">🔄</span>
+              <span class="label">Orientation</span>
+            </button>
+          </div>
+        </ng-ribbon-group>
+
+        <ng-ribbon-group name="Arrière-plan de la page">
+          <button class="ribbon-button large" (click)="onAction('Filigrane')" title="Ajouter un filigrane">
+            <span class="icon">💧</span>
+            <span class="label">Filigrane</span>
+          </button>
+          <button class="ribbon-button large" (click)="onAction('Couleur Page')" title="Changer la couleur d'arrière-plan de la page">
+            <span class="icon">🎨</span>
+            <span class="label">Couleur Page</span>
+          </button>
+        </ng-ribbon-group>
+
+      </ng-ribbon-tab>
+
+      <ng-ribbon-tab name="Révision" [order]="4">
+
+        <ng-ribbon-group name="Vérification">
+          <button class="ribbon-button large" (click)="onAction('Orthographe')" title="Vérifier l'orthographe et la grammaire">
+            <span class="icon">ABC</span>
+            <span class="label">Orthographe</span>
+          </button>
+        </ng-ribbon-group>
+
+        <ng-ribbon-group name="Commentaires">
+          <button class="ribbon-button large" (click)="onAction('Nouveau Commentaire')" title="Ajouter un nouveau commentaire">
+            <span class="icon">💬</span>
+            <span class="label">Nouv. Com.</span>
+          </button>
+          <button class="ribbon-button large" (click)="onAction('Supprimer Commentaire')" title="Supprimer un commentaire">
+            <span class="icon">🗑️</span>
+            <span class="label">Suppr. Com.</span>
+          </button>
+        </ng-ribbon-group>
+
+        <ng-ribbon-group name="Protéger">
+          <button class="ribbon-button large" (click)="onAction('Restreindre Modification')" title="Protéger le document">
+            <span class="icon">🔒</span>
+            <span class="label">Restreindre</span>
+          </button>
+        </ng-ribbon-group>
+
+      </ng-ribbon-tab>
+
     </ng-ribbon-context>
   </ng-ribbon>
+
+  <div class="content-placeholder" style="flex-grow: 1;">
+  </div>
 </div>

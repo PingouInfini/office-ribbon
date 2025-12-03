@@ -2,7 +2,13 @@
 .layout {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
+}
+
+.content-placeholder {
+  flex-grow: 1;
+  background-color: #f0f0f0; /* Donne une surface de clic visible */
+  min-height: 100px; /* Assure une zone de clic minimale */
 }
 
 .main-content {
