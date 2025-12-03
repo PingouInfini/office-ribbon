@@ -20,7 +20,7 @@ import {Component, output, input} from '@angular/core';
 })
 export class NgRibbonGroupComponent {
   // Bindings
-  public readonly name = input<string>(undefined);
+  public readonly name = input<string>();
   public readonly dialogLauncher = input(false);
   public readonly showDialog = output();
 }

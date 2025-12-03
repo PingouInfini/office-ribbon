@@ -7,7 +7,7 @@ import {NgStyle, NgTemplateOutlet} from '@angular/common';
 @Component({
   selector: 'ng-ribbon',
   template: `
-    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context.color() || '#dadbdc'}">
+    <div class="contexts" [ngStyle]="{borderColor: selectedTab?.context?.color() || '#dadbdc'}">
       @for (context of contexts; track context; let firstContext = $first) {
         <div class="context" [ngStyle]="{backgroundColor: context.color()}">
           @if (settings.useContexts) {
@@ -50,7 +50,7 @@ export class NgRibbonComponent {
 
   public contexts: NgRibbonContextComponent[] = [];
 
-  public selectedTab: NgRibbonTabComponent;
+  public selectedTab?: NgRibbonTabComponent;
 
   public selectTab(tab: NgRibbonTabComponent) {
     // Enable tab
@@ -99,8 +99,8 @@ export class NgRibbonComponent {
           }
         }));
       } else if ($event.deltaY < 0) { // Select previous tab
-        let prevTab = null;
-        let selectTab = null;
+        let prevTab: NgRibbonTabComponent | null = null;
+        let selectTab: NgRibbonTabComponent | null = null;
         this.contexts.forEach(c => c.tabs.forEach(t => {
           if (t == this.selectedTab) {
             selectTab = prevTab;

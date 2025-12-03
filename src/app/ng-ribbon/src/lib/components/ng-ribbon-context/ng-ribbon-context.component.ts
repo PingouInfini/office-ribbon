@@ -12,8 +12,8 @@ import {NgRibbonTabComponent} from "../ng-ribbon-tab/ng-ribbon-tab.component";
   ]
 })
 export class NgRibbonContextComponent implements OnInit, OnDestroy {
-  public readonly name = input<string>(undefined);
-  public readonly color = input<string>(undefined);
+  public readonly name = input<string>();
+  public readonly color = input<string>();
   @Input() public ribbon: NgRibbonComponent;
 
   public readonly headerTemplate = contentChild<TemplateRef<void>>('header');

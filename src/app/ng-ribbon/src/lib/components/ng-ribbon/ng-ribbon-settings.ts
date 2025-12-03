@@ -1,5 +1,5 @@
 export class NgRibbonSettings {
-  public mainTabName: string | false;
+  public mainTabName: string | false = false;
   public onMainTabActive: (element: HTMLElement) => void = () => {
   };
 

@@ -12,8 +12,8 @@ import {NgRibbonContextComponent} from "../ng-ribbon-context/ng-ribbon-context.c
 export class NgRibbonTabComponent implements OnInit, OnDestroy {
   // Bindings
   @HostBinding('class.active')
-  @Input() public active: boolean;
-  public readonly name = input<string>(undefined);
+  @Input() public active: boolean = false;
+  public readonly name = input<string>();
   @Input() public context: NgRibbonContextComponent;
   public readonly order = input(0);
 
