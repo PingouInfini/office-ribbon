@@ -1,0 +1,92 @@
+@import "../theme";
+
+:host {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  position: relative;
+  padding: 0 4px 20px;
+  border-right: 1px solid @borderColor;
+  min-width: 55px;
+  flex-shrink: 0;
+  flex-wrap: nowrap;
+  height: 100%;
+}
+
+:host.column, :host ::ng-deep .column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  justify-content: space-evenly;
+  margin: 0 5px;
+  height: 100%;
+}
+
+:host ::ng-deep {
+  .vertical-divider {
+    display: inline-block;
+    border-color: #d2d2d2;
+    height: 80%;
+    margin: 0 2px;
+
+    @media (min-width: 768px) {
+      margin: 0 5px;
+    }
+  }
+
+  input, select, mat-select {
+    background: white;
+    border: 1px solid #c6c6c6;
+    outline: none;
+    margin: 0 5px;
+    padding: 3px;
+
+    &:hover, &:focus {
+      border-color: #969696;
+    }
+  }
+
+  mat-icon {
+    vertical-align: middle;
+    margin: 0 !important;
+  }
+
+  .mat-mdc-button > .mat-icon {
+    height: 24px;
+    width: 24px;
+  }
+}
+
+.title {
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 24px;
+  height: 20px;
+  font-size: 11px;
+  text-align: center;
+  white-space: nowrap;
+  padding: 0 5px;
+
+  button {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    background: transparent;
+    border: none;
+    outline: none;
+
+    &:active, &:hover {
+      background-color: #c6c6c6;
+    }
+  }
+
+  svg {
+    width: 8px;
+    height: 8px;
+  }
+}

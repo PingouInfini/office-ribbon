@@ -1,0 +1,95 @@
+@import "../theme";
+
+:host {
+  display: block;
+  user-select: none; // Así no se pierde la selección del editor principal
+  background: white;
+  padding-top: 5px;
+}
+
+.contexts {
+  display: flex;
+  max-width: 100%;
+  align-items: flex-start;
+  border-bottom: 1px solid @borderColor;
+
+  &:first-child {
+    margin-left: 3px;
+  }
+
+  & > div {
+    max-width: 100%;
+  }
+}
+
+.context-header {
+  height: 30px;
+  text-align: center;
+  vertical-align: middle;
+  line-height: 30px;
+}
+
+.context + .context {
+  margin-left: 3px;
+}
+
+
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: block;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin-bottom: -1px; // Así se oculta el border inferior del ribbon en la pestaña seleccionada
+}
+
+li {
+  display: inline-block;
+  margin: 0 2px;
+
+  & > a {
+    display: block;
+    cursor: pointer;
+    padding: 0 14px;
+    font-size: 12px;
+    height: 30px;
+    line-height: 30px;
+    border: 1px solid transparent;
+    border-radius: 2px 2px 0 0;
+    transition: all 500ms cubic-bezier(0.35, 0, 0.25, 1);
+
+    &:hover {
+      border-color: @tabHoverBorder;
+      border-bottom-color: @borderColor;
+      text-decoration: none;
+      background-color: @tabHoverBg;
+    }
+  }
+
+  &.active > a {
+    color: #555;
+    cursor: default;
+    background-color: @bgColor;
+    border: 1px solid @borderColor;
+    border-bottom-color: transparent;
+  }
+
+  &.main > a {
+    background-color: @mainTabBg;
+    color: white;
+
+    &:hover {
+      background-color: @mainTabHoverBg;
+    }
+  }
+}
+
+::ng-deep ng-ribbon-tab {
+  display: none;
+}
+
+.ribbon-content {
+  background-color: @bgColor;
+}
