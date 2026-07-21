@@ -1,1 +1,44 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Boutons génériques (Déplacés ici pour être globaux et s'appliquer partout, y compris dans les sous-composants) */
+.ribbon-button {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333;
+  transition: all 0.2s ease;
+}
+
+.ribbon-button:hover {
+  background-color: #cde6f7;
+  border-color: #92c0e0;
+}
+
+.ribbon-button:active {
+  background-color: #a3d1f0;
+}
+
+/* List Type Menu Overlay */
+.list-type-menu {
+  background: white;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px 0 rgba(34, 47, 62, .1);
+}
+
+.list-type-menu mat-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
+}
+
+.list-type-menu button {
+  padding: 0;
+  min-width: auto;
+  display: inline-flex;
+}

@@ -1,4 +1,4 @@
-import {Component, output, input} from '@angular/core';
+import {Component, output, input, HostListener} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 
 @Component({
@@ -46,6 +46,15 @@ import {MatButton} from '@angular/material/button';
       min-width: 30px;
       height: 30px;
       line-height: 30px;
+      cursor: pointer;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+    button:hover {
+      background-color: #e1f0fa;
+      border-color: #92c0e0;
+      transform: scale(1.1);
     }
   `],
   imports: [MatButton]
@@ -76,4 +85,9 @@ export class SymbolListComponent {
       symbols: ["€", "$", "£", "¢", "¥", "¤", "₧", "₨", "￦"]
     },
   ]
+
+  @HostListener('wheel', ['$event'])
+  public onWheel(event: WheelEvent) {
+    event.stopPropagation();
+  }
 }

@@ -7,8 +7,10 @@
 
 .content-placeholder {
   flex-grow: 1;
-  background-color: #f0f0f0; /* Donne une surface de clic visible */
-  min-height: 100px; /* Assure une zone de clic minimale */
+  background-color: #f0f0f0;
+  /* Donne une surface de clic visible */
+  min-height: 100px;
+  /* Assure une zone de clic minimale */
 }
 
 .main-content {
@@ -23,7 +25,8 @@
   height: 100%;
   align-items: flex-start;
   padding-top: 2px;
-  flex-wrap: nowrap; /* Empêche le retour à la ligne globalement dans la toolbar */
+  flex-wrap: nowrap;
+  /* Empêche le retour à la ligne globalement dans la toolbar */
 }
 
 .column {
@@ -32,7 +35,8 @@
   justify-content: space-between;
   height: 100%;
   padding: 0 2px;
-  white-space: nowrap; /* Empêche le contenu de se scinder (boutons masqués) */
+  white-space: nowrap;
+  /* Empêche le contenu de se scinder (boutons masqués) */
 }
 
 .row {
@@ -43,48 +47,39 @@
   white-space: nowrap;
 }
 
-/* Boutons génériques */
-.ribbon-button {
-  background: transparent;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #333;
-}
 
-.ribbon-button:hover {
-  background-color: #cde6f7;
-  border-color: #92c0e0;
-}
 
 /* Bouton Large (Icône en haut, texte en bas) */
 .ribbon-button.large {
   flex-direction: column;
-  height: 50px; /* Réduit de 65px à 50px */
+  height: 50px;
+  /* Réduit de 65px à 50px */
   min-width: 45px;
-  padding: 2px 4px; /* Réduit le padding */
+  padding: 2px 4px;
+  /* Réduit le padding */
   margin: 0 2px;
 }
 
 .ribbon-button.large .icon {
-  font-size: 20px; /* Réduit de 24px à 20px */
+  font-size: 20px;
+  /* Réduit de 24px à 20px */
   margin-bottom: 2px;
 }
 
 .ribbon-button.large .label {
-  font-size: 10px; /* Réduit de 11px à 10px */
+  font-size: 10px;
+  /* Réduit de 11px à 10px */
   white-space: nowrap;
 }
 
 /* Bouton Small (Icône à gauche, texte à droite) */
 .ribbon-button.small {
   flex-direction: row;
-  height: 20px; /* Réduit de 22px à 20px */
+  height: 20px;
+  /* Réduit de 22px à 20px */
   padding: 0 4px;
-  font-size: 10px; /* Réduit de 11px à 10px */
+  font-size: 10px;
+  /* Réduit de 11px à 10px */
   width: 100%;
   justify-content: flex-start;
   white-space: nowrap;
@@ -92,10 +87,12 @@
 
 /* Bouton Tiny (Juste une icône ou une lettre) */
 .ribbon-button.tiny {
-  width: 22px; /* Réduit de 24px à 22px */
+  width: 22px;
+  /* Réduit de 24px à 22px */
   height: 22px;
   margin-right: 2px;
-  font-size: 11px; /* Légèrement réduit */
+  font-size: 11px;
+  /* Légèrement réduit */
   padding: 0;
 }
 
@@ -103,33 +100,21 @@
 .color-picker-wrapper {
   position: relative;
   display: flex;
+}
 
 :host ::ng-deep ng-ribbon-group {
-  height: 70px !important; /* Hauteur fortement réduite pour le groupe du ruban */
+  height: 70px !important;
+  /* Hauteur fortement réduite pour le groupe du ruban */
 }
 
 :host ::ng-deep .btn-color-preview {
-  width: 100%;
-  position: absolute;
-  bottom: 6px;
-  left: 0;
-  right: 0;
-}
-:host ::ng-deep .btn-color-preview > div {
-  width: 20px;
-  height: 5px;
-  margin: 0 auto;
+  width: 65%;
+  display: flex;
+  justify-content: center;
+  margin-top: 1px;
 }
 
-:host ::ng-deep .list-type-menu {
-  background: white;
-  padding: 4px;
-  border: 1px solid #ccc;
-  border-radius: 3px;
-  box-shadow: 0 4px 8px 0 rgba(34, 47, 62, .1);
-}
-:host ::ng-deep .list-type-menu mat-icon {
-  display: block;
-  width: 48px;
-  height: 48px;
+:host ::ng-deep .btn-color-preview>div {
+  width: 34px;
+  height: 5px;
 }

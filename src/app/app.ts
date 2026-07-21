@@ -14,6 +14,7 @@ import { SplitButtonComponent } from './components/split-button.component';
 import { SymbolListComponent } from './components/symbol-list.component';
 import { IconsService } from './components/icons.service';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +30,8 @@ import { MatIconModule } from '@angular/material/icon';
     ColorSketchModule,
     SplitButtonComponent,
     SymbolListComponent,
-    MatIconModule
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class App {
@@ -44,6 +46,18 @@ export class App {
 
   constructor(private iconsService: IconsService) {
     this.iconsService.configure();
+  }
+
+  public onColorChange(type: 'back' | 'fore', event: any) {
+    const rgba = event.color.rgb;
+    const colorStr = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+    if (type === 'back') {
+      this.backColor = colorStr;
+      this.onAction('Couleur Fond: ' + colorStr);
+    } else {
+      this.foreColor = colorStr;
+      this.onAction('Couleur Texte: ' + colorStr);
+    }
   }
 
   // Méthode onAction de la sandbox

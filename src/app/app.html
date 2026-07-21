@@ -52,7 +52,7 @@
                   <ng-template #bgColorMenu>
                     <color-sketch style="width: 220px"
                                   [color]="backColor"
-                                  (onChangeComplete)="backColor = $event.color.hex; onAction('Couleur Fond: ' + backColor)"></color-sketch>
+                                  (onChangeComplete)="onColorChange('back', $event)"></color-sketch>
                   </ng-template>
                 </app-split-button>
                 
@@ -67,7 +67,7 @@
                   <ng-template #foreColorMenu>
                     <color-sketch style="width: 220px"
                                   [color]="foreColor"
-                                  (onChangeComplete)="foreColor = $event.color.hex; onAction('Couleur Texte: ' + foreColor)"></color-sketch>
+                                  (onChangeComplete)="onColorChange('fore', $event)"></color-sketch>
                   </ng-template>
                 </app-split-button>
               </div>
@@ -85,19 +85,19 @@
             </div>
             <div class="row button-group">
               <app-split-button
-                matTooltip="Liste" class="sm"
+                title="Liste" class="sm"
                 (mainBtnClick)="onAction('Liste: disc')"
                 [dropDownMenu]="listMenu">
                 <mat-icon svgIcon="unordered-list"></mat-icon>
                 <ng-template #listMenu>
                   <div class="list-type-menu">
-                    <button mat-button (click)="onAction('Liste: disc')">
+                    <button class="ribbon-button" (click)="onAction('Liste: disc')">
                       <mat-icon svgIcon="list-bull-default"></mat-icon>
                     </button>
-                    <button mat-button (click)="onAction('Liste: circle')">
+                    <button class="ribbon-button" (click)="onAction('Liste: circle')">
                       <mat-icon svgIcon="list-bull-circle"></mat-icon>
                     </button>
-                    <button mat-button (click)="onAction('Liste: square')">
+                    <button class="ribbon-button" (click)="onAction('Liste: square')">
                       <mat-icon svgIcon="list-bull-square"></mat-icon>
                     </button>
                   </div>
@@ -105,31 +105,31 @@
               </app-split-button>
               
               <app-split-button
-                matTooltip="Liste ordonnée" class="sm"
+                title="Liste ordonnée" class="sm"
                 (mainBtnClick)="onAction('Liste ordonnée: decimal')"
                 [dropDownMenu]="orderedListMenu">
                 <mat-icon svgIcon="ordered-list"></mat-icon>
                 <ng-template #orderedListMenu>
                   <div class="list-type-menu" style="display: flex; gap: 4px;">
                     <div style="display: flex; flex-direction: column;">
-                      <button mat-button (click)="onAction('Liste ordonnée: decimal')">
+                      <button class="ribbon-button" (click)="onAction('Liste ordonnée: decimal')">
                         <mat-icon svgIcon="list-num-default"></mat-icon>
                       </button>
-                      <button mat-button (click)="onAction('Liste ordonnée: lower-alpha')">
+                      <button class="ribbon-button" (click)="onAction('Liste ordonnée: lower-alpha')">
                         <mat-icon svgIcon="list-num-lower-alpha"></mat-icon>
                       </button>
-                      <button mat-button (click)="onAction('Liste ordonnée: lower-greek')">
+                      <button class="ribbon-button" (click)="onAction('Liste ordonnée: lower-greek')">
                         <mat-icon svgIcon="list-num-lower-greek"></mat-icon>
                       </button>
                     </div>
                     <div style="display: flex; flex-direction: column;">
-                      <button mat-button (click)="onAction('Liste ordonnée: lower-roman')">
+                      <button class="ribbon-button" (click)="onAction('Liste ordonnée: lower-roman')">
                         <mat-icon svgIcon="list-num-lower-roman"></mat-icon>
                       </button>
-                      <button mat-button (click)="onAction('Liste ordonnée: upper-alpha')">
+                      <button class="ribbon-button" (click)="onAction('Liste ordonnée: upper-alpha')">
                         <mat-icon svgIcon="list-num-upper-alpha"></mat-icon>
                       </button>
-                      <button mat-button (click)="onAction('Liste ordonnée: upper-roman')">
+                      <button class="ribbon-button" (click)="onAction('Liste ordonnée: upper-roman')">
                         <mat-icon svgIcon="list-num-upper-roman"></mat-icon>
                       </button>
                     </div>
