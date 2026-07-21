@@ -103,55 +103,33 @@
 .color-picker-wrapper {
   position: relative;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  border-radius: 3px;
-  margin-right: 2px;
-  border: 1px solid transparent;
-}
-
-.color-picker-wrapper:hover {
-  background-color: #cde6f7;
-  border-color: #92c0e0;
-}
-
-.color-picker-wrapper input[type="color"] {
-  opacity: 0;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  cursor: pointer;
-}
-
-.color-picker-wrapper svg {
-  width: 16px;
-  height: 16px;
-  fill: #333;
-}
-
-.color-picker-wrapper .color-preview {
-  width: 14px;
-  height: 3px;
-  margin-top: 1px;
-}
 
 :host ::ng-deep ng-ribbon-group {
   height: 70px !important; /* Hauteur fortement réduite pour le groupe du ruban */
 }
 
-/* Fix CSS for split buttons */
-:host ::ng-deep app-split-button {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-right: 4px;
+:host ::ng-deep .btn-color-preview {
+  width: 100%;
+  position: absolute;
+  bottom: 6px;
+  left: 0;
+  right: 0;
 }
-:host ::ng-deep app-split-button mat-icon {
-  margin-bottom: 2px;
+:host ::ng-deep .btn-color-preview > div {
+  width: 20px;
+  height: 5px;
+  margin: 0 auto;
+}
+
+:host ::ng-deep .list-type-menu {
+  background: white;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-shadow: 0 4px 8px 0 rgba(34, 47, 62, .1);
+}
+:host ::ng-deep .list-type-menu mat-icon {
+  display: block;
+  width: 48px;
+  height: 48px;
 }

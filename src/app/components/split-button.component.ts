@@ -12,11 +12,11 @@ import {MenuTriggerDirective} from './menu-trigger.directive';
     </button>
     @if (isMatMenu) {
       <button
-        mat-button class="split-button" [matMenuTriggerFor]="$any(dropDownMenu())" [class.active]="isActive()" [disabled]="disabled()">
+        mat-button class="split-button" [matMenuTriggerFor]="$any(dropDownMenu())" #matTrigger="matMenuTrigger" [class.active]="isActive() || matTrigger.menuOpen" [disabled]="disabled()">
         <mat-icon class="drop-down-icon">arrow_drop_down</mat-icon>
       </button>
     } @else {
-      <button mat-button class="split-button" [menuTriggerFor]="$any(dropDownMenu())" [class.active]="isActive()" [disabled]="disabled()">
+      <button mat-button class="split-button" [menuTriggerFor]="$any(dropDownMenu())" #customTrigger="menuTrigger" [class.active]="isActive() || customTrigger.isOpen" [disabled]="disabled()">
         <mat-icon class="drop-down-icon">arrow_drop_down</mat-icon>
       </button>
     }

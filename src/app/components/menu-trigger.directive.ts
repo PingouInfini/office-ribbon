@@ -2,7 +2,10 @@ import {Directive, ElementRef, EmbeddedViewRef, HostListener, OnDestroy, Templat
 import {ConnectionPositionPair, Overlay, OverlayRef} from "@angular/cdk/overlay";
 import {TemplatePortal} from "@angular/cdk/portal";
 
-@Directive({selector: '[menuTriggerFor]'})
+@Directive({
+  selector: '[menuTriggerFor]',
+  exportAs: 'menuTrigger'
+})
 export class MenuTriggerDirective implements OnDestroy {
   private _overlaySvc = inject(Overlay);
   private _host = inject<ElementRef<HTMLElement>>(ElementRef);
@@ -12,6 +15,7 @@ export class MenuTriggerDirective implements OnDestroy {
 
   private _overlayRef!: OverlayRef;
   private _embeddedViewRef!: EmbeddedViewRef<any>;
+  public isOpen = false;
 
   @HostListener('click')
   public onClick() {
@@ -27,7 +31,11 @@ export class MenuTriggerDirective implements OnDestroy {
         scrollStrategy: this._overlaySvc.scrollStrategies.block(),
       }
     );
-    overlayRef.backdropClick().subscribe(() => overlayRef.dispose());
+    this.isOpen = true;
+    overlayRef.backdropClick().subscribe(() => {
+      overlayRef.dispose();
+      this.isOpen = false;
+    });
 
     if (this.menuTriggerFor()) {
       const templatePortal = new TemplatePortal(this.menuTriggerFor()!, this._viewContainerRef);
@@ -43,6 +51,7 @@ export class MenuTriggerDirective implements OnDestroy {
       this._overlayRef.detach();
       this._overlayRef.dispose();
     }
+    this.isOpen = false;
   }
 }
 

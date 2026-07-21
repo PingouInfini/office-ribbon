@@ -17,32 +17,35 @@ import {MatButton} from '@angular/material/button';
   styles: [`
     :host {
       display: block;
-      max-height: 75px;
+      max-height: 55px;
       min-width: 200px;
       max-width: 700px;
       overflow-y: scroll;
       background: #fafbfc;
       border: 1px solid #dbdcdd;
-      padding: 5px;
+      padding: 2px;
     }
 
     div {
-      margin-bottom: 10px;
+      margin-bottom: 5px;
     }
 
     h3 {
       color: rgba(0, 0, 0, .54);
-      font-size: 14px;
-      margin: 0 0 5px 0;
+      font-size: 11px;
+      margin: 0 0 2px 0;
       border-bottom: 1px solid rgba(0, 0, 0, .14);
     }
 
     button {
-      font-size: 40px;
-      padding: 0 10px;
-      margin-bottom: 10px;
-      width: 40px;
-      max-width: 40px;
+      font-size: 20px;
+      padding: 0 5px;
+      margin-bottom: 2px;
+      width: 30px;
+      max-width: 30px;
+      min-width: 30px;
+      height: 30px;
+      line-height: 30px;
     }
   `],
   imports: [MatButton]

@@ -46,7 +46,9 @@
                   (mainBtnClick)="onAction('Couleur Fond: ' + backColor)"
                   [dropDownMenu]="bgColorMenu">
                   <mat-icon svgIcon="highlight-bg-color"></mat-icon>
-                  <div class="color-preview" [style.background]="backColor"></div>
+                  <div class="btn-color-preview">
+                    <div [style.background]="backColor"></div>
+                  </div>
                   <ng-template #bgColorMenu>
                     <color-sketch style="width: 220px"
                                   [color]="backColor"
@@ -59,7 +61,9 @@
                   (mainBtnClick)="onAction('Couleur Texte: ' + foreColor)"
                   [dropDownMenu]="foreColorMenu">
                   <mat-icon svgIcon="text-color"></mat-icon>
-                  <div class="color-preview" [style.background]="foreColor"></div>
+                  <div class="btn-color-preview">
+                    <div [style.background]="foreColor"></div>
+                  </div>
                   <ng-template #foreColorMenu>
                     <color-sketch style="width: 220px"
                                   [color]="foreColor"
@@ -80,14 +84,58 @@
               <button class="ribbon-button tiny" (click)="onAction('Justifier')" title="Justifier le texte">⁚</button>
             </div>
             <div class="row button-group">
-              <button class="ribbon-button small" (click)="onAction('Puces')" title="Liste à puces">
-                <svg width="16" height="16" viewBox="0 0 24 24" style="fill: #333; margin-right: 4px;"><path d="M11 5h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2zm0 6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2zm0 6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2zM4.5 6c0-.4.1-.8.4-1 .3-.4.7-.5 1.1-.5.4 0 .8.1 1 .4.4.3.5.7.5 1.1 0 .4-.1.8-.4 1-.3.4-.7.5-1.1.5-.4 0-.8-.1-1-.4-.4-.3-.5-.7-.5-1.1zm0 6c0-.4.1-.8.4-1 .3-.4.7-.5 1.1-.5.4 0 .8.1 1 .4.4.3.5.7.5 1.1 0 .4-.1.8-.4 1-.3.4-.7.5-1.1.5-.4 0-.8-.1-1-.4-.4-.3-.5-.7-.5-1.1zm0 6c0-.4.1-.8.4-1 .3-.4.7-.5 1.1-.5.4 0 .8.1 1 .4.4.3.5.7.5 1.1 0 .4-.1.8-.4 1-.3.4-.7.5-1.1.5-.4 0-.8-.1-1-.4-.4-.3-.5-.7-.5-1.1z" fill-rule="evenodd"/></svg>
-                À puces
-              </button>
-              <button class="ribbon-button small" (click)="onAction('Numérotation')" title="Numérotation">
-                <svg width="16" height="16" viewBox="0 0 24 24" style="fill: #333; margin-right: 4px;"><path d="M10 17h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2zm0-6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 0 1 0-2zm0-6h8c.6 0 1 .4 1 1s-.4 1-1 1h-8a1 1 0 1 1 0-2zM6 4v3.5c0 .3-.2.5-.5.5a.5.5 0 0 1-.5-.5V5h-.5a.5.5 0 0 1 0-1H6zm-1 8.8l.2.2h1.3c.3 0 .5.2.5.5s-.2.5-.5.5H4.9a1 1 0 0 1-.9-1V13c0-.4.3-.8.6-1l1.2-.4.2-.3a.2.2 0 0 0-.2-.2H4.5a.5.5 0 0 1-.5-.5c0-.3.2-.5.5-.5h1.6c.5 0 .9.4.9 1v.1c0 .4-.3.8-.6 1l-1.2.4-.2.3zM7 17v2c0 .6-.4 1-1 1H4.5a.5.5 0 0 1 0-1h1.2c.2 0 .3-.1.3-.3 0-.2-.1-.3-.3-.3H4.4a.4.4 0 1 1 0-.8h1.3c.2 0 .3-.1.3-.3 0-.2-.1-.3-.3-.3H4.5a.5.5 0 1 1 0-1H6c.6 0 1 .4 1 1z" fill-rule="evenodd"/></svg>
-                Numérotée
-              </button>
+              <app-split-button
+                matTooltip="Liste" class="sm"
+                (mainBtnClick)="onAction('Liste: disc')"
+                [dropDownMenu]="listMenu">
+                <mat-icon svgIcon="unordered-list"></mat-icon>
+                <ng-template #listMenu>
+                  <div class="list-type-menu">
+                    <button mat-button (click)="onAction('Liste: disc')">
+                      <mat-icon svgIcon="list-bull-default"></mat-icon>
+                    </button>
+                    <button mat-button (click)="onAction('Liste: circle')">
+                      <mat-icon svgIcon="list-bull-circle"></mat-icon>
+                    </button>
+                    <button mat-button (click)="onAction('Liste: square')">
+                      <mat-icon svgIcon="list-bull-square"></mat-icon>
+                    </button>
+                  </div>
+                </ng-template>
+              </app-split-button>
+              
+              <app-split-button
+                matTooltip="Liste ordonnée" class="sm"
+                (mainBtnClick)="onAction('Liste ordonnée: decimal')"
+                [dropDownMenu]="orderedListMenu">
+                <mat-icon svgIcon="ordered-list"></mat-icon>
+                <ng-template #orderedListMenu>
+                  <div class="list-type-menu" style="display: flex; gap: 4px;">
+                    <div style="display: flex; flex-direction: column;">
+                      <button mat-button (click)="onAction('Liste ordonnée: decimal')">
+                        <mat-icon svgIcon="list-num-default"></mat-icon>
+                      </button>
+                      <button mat-button (click)="onAction('Liste ordonnée: lower-alpha')">
+                        <mat-icon svgIcon="list-num-lower-alpha"></mat-icon>
+                      </button>
+                      <button mat-button (click)="onAction('Liste ordonnée: lower-greek')">
+                        <mat-icon svgIcon="list-num-lower-greek"></mat-icon>
+                      </button>
+                    </div>
+                    <div style="display: flex; flex-direction: column;">
+                      <button mat-button (click)="onAction('Liste ordonnée: lower-roman')">
+                        <mat-icon svgIcon="list-num-lower-roman"></mat-icon>
+                      </button>
+                      <button mat-button (click)="onAction('Liste ordonnée: upper-alpha')">
+                        <mat-icon svgIcon="list-num-upper-alpha"></mat-icon>
+                      </button>
+                      <button mat-button (click)="onAction('Liste ordonnée: upper-roman')">
+                        <mat-icon svgIcon="list-num-upper-roman"></mat-icon>
+                      </button>
+                    </div>
+                  </div>
+                </ng-template>
+              </app-split-button>
             </div>
           </div>
         </ng-ribbon-group>
