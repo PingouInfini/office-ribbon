@@ -9,6 +9,12 @@ import {
   NgRibbonSettings
 } from './ng-ribbon/src/public-api';
 
+import { ColorSketchModule } from 'ngx-color/sketch';
+import { SplitButtonComponent } from './components/split-button.component';
+import { SymbolListComponent } from './components/symbol-list.component';
+import { IconsService } from './components/icons.service';
+import { MatIconModule } from '@angular/material/icon';
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,7 +25,11 @@ import {
     NgRibbonComponent,
     NgRibbonContextComponent,
     NgRibbonTabComponent,
-    NgRibbonGroupComponent
+    NgRibbonGroupComponent,
+    ColorSketchModule,
+    SplitButtonComponent,
+    SymbolListComponent,
+    MatIconModule
   ]
 })
 export class App {
@@ -28,6 +38,13 @@ export class App {
     useContexts: false,
     mouseWheelTabs: true   // Permet de changer d'onglet avec la molette
   });
+
+  public backColor = 'yellow';
+  public foreColor = 'red';
+
+  constructor(private iconsService: IconsService) {
+    this.iconsService.configure();
+  }
 
   // Méthode onAction de la sandbox
   public onAction(actionName: string) {
