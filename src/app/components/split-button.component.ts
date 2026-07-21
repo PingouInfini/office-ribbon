@@ -1,6 +1,5 @@
 import {Component, TemplateRef, output, input, ViewChild} from '@angular/core';
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
-import {MatIcon} from '@angular/material/icon';
 import {MenuTriggerDirective} from './menu-trigger.directive';
 
 @Component({
@@ -57,7 +56,7 @@ import {MenuTriggerDirective} from './menu-trigger.directive';
       background-color: #a3d1f0 !important;
     }
   `],
-  imports: [MatMenuTrigger, MatIcon, MenuTriggerDirective]
+  imports: [MatMenuTrigger, MenuTriggerDirective]
 })
 export class SplitButtonComponent {
   public readonly disabled = input(false);

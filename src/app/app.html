@@ -12,9 +12,12 @@
               <span class="label">Coller</span>
             </button>
             <div class="column">
-              <button class="ribbon-button small" (click)="onAction('Couper')" title="Couper la sélection (Ctrl+X)">✂️ Couper</button>
-              <button class="ribbon-button small" (click)="onAction('Copier')" title="Copier la sélection (Ctrl+C)">📄 Copier</button>
-              <button class="ribbon-button small" (click)="onAction('Reproduire Format')" title="Reproduire la mise en forme">🖌️ Repr. Format</button>
+              <button class="ribbon-button small" (click)="onAction('Couper')" title="Couper la sélection (Ctrl+X)">✂️
+                Couper</button>
+              <button class="ribbon-button small" (click)="onAction('Copier')" title="Copier la sélection (Ctrl+C)">📄
+                Copier</button>
+              <button class="ribbon-button small" (click)="onAction('Reproduire Format')"
+                title="Reproduire la mise en forme">🖌️ Repr. Format</button>
             </div>
           </div>
         </ng-ribbon-group>
@@ -36,38 +39,34 @@
               </div>
               <div class="row button-group">
                 <button class="ribbon-button tiny" (click)="onAction('Gras')" title="Gras (Ctrl+G)"><b>G</b></button>
-                <button class="ribbon-button tiny" (click)="onAction('Italique')" title="Italique (Ctrl+I)"><i>I</i></button>
-                <button class="ribbon-button tiny" (click)="onAction('Souligné')" title="Souligné (Ctrl+S)"><u>S</u></button>
+                <button class="ribbon-button tiny" (click)="onAction('Italique')"
+                  title="Italique (Ctrl+I)"><i>I</i></button>
+                <button class="ribbon-button tiny" (click)="onAction('Souligné')"
+                  title="Souligné (Ctrl+S)"><u>S</u></button>
                 <button class="ribbon-button tiny" (click)="onAction('Barré')" title="Barrer le texte">~~</button>
                 <div style="width: 2px; height: 20px; background-color: #ccc; margin: 0 4px;"></div>
-                
-                <app-split-button
-                  title="Couleur de fond"
-                  (mainBtnClick)="onAction('Couleur Fond: ' + backColor)"
+
+                <app-split-button title="Couleur de fond" (mainBtnClick)="onAction('Couleur Fond: ' + backColor)"
                   [dropDownMenu]="bgColorMenu">
                   <mat-icon svgIcon="highlight-bg-color"></mat-icon>
                   <div class="btn-color-preview">
                     <div [style.background]="backColor"></div>
                   </div>
                   <ng-template #bgColorMenu>
-                    <color-sketch style="width: 220px"
-                                  [color]="backColor"
-                                  (onChangeComplete)="onColorChange('back', $event)"></color-sketch>
+                    <color-sketch style="width: 220px" [color]="backColor"
+                      (onChangeComplete)="onColorChange('back', $event)"></color-sketch>
                   </ng-template>
                 </app-split-button>
-                
-                <app-split-button
-                  title="Couleur de police"
-                  (mainBtnClick)="onAction('Couleur Texte: ' + foreColor)"
+
+                <app-split-button title="Couleur de police" (mainBtnClick)="onAction('Couleur Texte: ' + foreColor)"
                   [dropDownMenu]="foreColorMenu">
                   <mat-icon svgIcon="text-color"></mat-icon>
                   <div class="btn-color-preview">
                     <div [style.background]="foreColor"></div>
                   </div>
                   <ng-template #foreColorMenu>
-                    <color-sketch style="width: 220px"
-                                  [color]="foreColor"
-                                  (onChangeComplete)="onColorChange('fore', $event)"></color-sketch>
+                    <color-sketch style="width: 220px" [color]="foreColor"
+                      (onChangeComplete)="onColorChange('fore', $event)"></color-sketch>
                   </ng-template>
                 </app-split-button>
               </div>
@@ -78,15 +77,15 @@
         <ng-ribbon-group name="Paragraphe" [dialogLauncher]="true" (showDialog)="openGroupDialog('Paragraphe')">
           <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
             <div class="row button-group">
-              <button class="ribbon-button tiny" (click)="onAction('Aligner Gauche')" title="Aligner le texte à gauche">◀</button>
+              <button class="ribbon-button tiny" (click)="onAction('Aligner Gauche')"
+                title="Aligner le texte à gauche">◀</button>
               <button class="ribbon-button tiny" (click)="onAction('Centrer')" title="Centrer le texte">≡</button>
-              <button class="ribbon-button tiny" (click)="onAction('Aligner Droite')" title="Aligner le texte à droite">▶</button>
+              <button class="ribbon-button tiny" (click)="onAction('Aligner Droite')"
+                title="Aligner le texte à droite">▶</button>
               <button class="ribbon-button tiny" (click)="onAction('Justifier')" title="Justifier le texte">⁚</button>
             </div>
             <div class="row button-group">
-              <app-split-button
-                title="Liste" class="sm"
-                (mainBtnClick)="onAction('Liste: disc')"
+              <app-split-button title="Liste" class="sm" (mainBtnClick)="onAction('Liste: disc')"
                 [dropDownMenu]="listMenu">
                 <mat-icon svgIcon="unordered-list"></mat-icon>
                 <ng-template #listMenu>
@@ -103,10 +102,8 @@
                   </div>
                 </ng-template>
               </app-split-button>
-              
-              <app-split-button
-                title="Liste ordonnée" class="sm"
-                (mainBtnClick)="onAction('Liste ordonnée: decimal')"
+
+              <app-split-button title="Liste ordonnée" class="sm" (mainBtnClick)="onAction('Liste ordonnée: decimal')"
                 [dropDownMenu]="orderedListMenu">
                 <mat-icon svgIcon="ordered-list"></mat-icon>
                 <ng-template #orderedListMenu>
@@ -160,7 +157,8 @@
         </ng-ribbon-group>
 
         <ng-ribbon-group name="Illustrations">
-          <button class="ribbon-button large" (click)="onAction('Images')" title="Insérer une image à partir de l'ordinateur">
+          <button class="ribbon-button large" (click)="onAction('Images')"
+            title="Insérer une image à partir de l'ordinateur">
             <span class="icon">🖼️</span>
             <span class="label">Images</span>
           </button>
@@ -172,9 +170,12 @@
 
         <ng-ribbon-group name="En-têtes et Pieds de page">
           <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
-            <button class="ribbon-button small" (click)="onAction('En-tête')" title="Ajouter un en-tête">H En-tête</button>
-            <button class="ribbon-button small" (click)="onAction('Pied de page')" title="Ajouter un pied de page">F Pied de page</button>
-            <button class="ribbon-button small" (click)="onAction('Numéro de Page')" title="Insérer un numéro de page"># Num. Page</button>
+            <button class="ribbon-button small" (click)="onAction('En-tête')" title="Ajouter un en-tête">H
+              En-tête</button>
+            <button class="ribbon-button small" (click)="onAction('Pied de page')" title="Ajouter un pied de page">F
+              Pied de page</button>
+            <button class="ribbon-button small" (click)="onAction('Numéro de Page')" title="Insérer un numéro de page">#
+              Num. Page</button>
           </div>
         </ng-ribbon-group>
 
@@ -187,16 +188,15 @@
       <ng-ribbon-tab name="Mise en page" [order]="3">
 
         <ng-ribbon-group name="Mise en page" [dialogLauncher]="true" (showDialog)="openGroupDialog('Mise en page')">
-          <div class="ribbon-toolbar column" style="height: 100%; justify-content: space-evenly;">
-            <button class="ribbon-button large" (click)="onAction('Marges')" title="Définir les marges du document">
-              <span class="icon">📐</span>
-              <span class="label">Marges</span>
-            </button>
-            <button class="ribbon-button large" (click)="onAction('Orientation')" title="Changer l'orientation de la page (Portrait/Paysage)">
-              <span class="icon">🔄</span>
-              <span class="label">Orientation</span>
-            </button>
-          </div>
+          <button class="ribbon-button large" (click)="onAction('Marges')" title="Définir les marges du document">
+            <span class="icon">📐</span>
+            <span class="label">Marges</span>
+          </button>
+          <button class="ribbon-button large" (click)="onAction('Orientation')"
+            title="Changer l'orientation de la page (Portrait/Paysage)">
+            <span class="icon">🔄</span>
+            <span class="label">Orientation</span>
+          </button>
         </ng-ribbon-group>
 
         <ng-ribbon-group name="Arrière-plan de la page">
@@ -204,7 +204,8 @@
             <span class="icon">💧</span>
             <span class="label">Filigrane</span>
           </button>
-          <button class="ribbon-button large" (click)="onAction('Couleur Page')" title="Changer la couleur d'arrière-plan de la page">
+          <button class="ribbon-button large" (click)="onAction('Couleur Page')"
+            title="Changer la couleur d'arrière-plan de la page">
             <span class="icon">🎨</span>
             <span class="label">Couleur Page</span>
           </button>
@@ -215,25 +216,29 @@
       <ng-ribbon-tab name="Révision" [order]="4">
 
         <ng-ribbon-group name="Vérification">
-          <button class="ribbon-button large" (click)="onAction('Orthographe')" title="Vérifier l'orthographe et la grammaire">
+          <button class="ribbon-button large" (click)="onAction('Orthographe')"
+            title="Vérifier l'orthographe et la grammaire">
             <span class="icon">ABC</span>
             <span class="label">Orthographe</span>
           </button>
         </ng-ribbon-group>
 
         <ng-ribbon-group name="Commentaires">
-          <button class="ribbon-button large" (click)="onAction('Nouveau Commentaire')" title="Ajouter un nouveau commentaire">
+          <button class="ribbon-button large" (click)="onAction('Nouveau Commentaire')"
+            title="Ajouter un nouveau commentaire">
             <span class="icon">💬</span>
             <span class="label">Nouv. Com.</span>
           </button>
-          <button class="ribbon-button large" (click)="onAction('Supprimer Commentaire')" title="Supprimer un commentaire">
+          <button class="ribbon-button large" (click)="onAction('Supprimer Commentaire')"
+            title="Supprimer un commentaire">
             <span class="icon">🗑️</span>
             <span class="label">Suppr. Com.</span>
           </button>
         </ng-ribbon-group>
 
         <ng-ribbon-group name="Protéger">
-          <button class="ribbon-button large" (click)="onAction('Restreindre Modification')" title="Protéger le document">
+          <button class="ribbon-button large" (click)="onAction('Restreindre Modification')"
+            title="Protéger le document">
             <span class="icon">🔒</span>
             <span class="label">Restreindre</span>
           </button>
