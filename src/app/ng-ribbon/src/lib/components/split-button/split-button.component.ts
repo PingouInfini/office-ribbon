@@ -1,6 +1,6 @@
 import {Component, TemplateRef, output, input, ViewChild} from '@angular/core';
 import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
-import {MenuTriggerDirective} from './menu-trigger.directive';
+import {MenuTriggerDirective} from '../../directives/menu-trigger.directive';
 
 @Component({
   selector: 'app-split-button',

@@ -1,5 +1,5 @@
 import {Injectable, LOCALE_ID, inject} from '@angular/core';
-import {getLocaleDirection} from "@angular/common";
+import {Directionality} from "@angular/cdk/bidi";
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from "@angular/platform-browser";
 
@@ -10,7 +10,7 @@ export class IconsService {
   private _locale = inject(LOCALE_ID);
   private _iconRegistry = inject(MatIconRegistry);
   private _sanitizer = inject(DomSanitizer);
-
+  private _directionality = inject(Directionality, {optional: true});
 
   private _initialized = false;
 
@@ -19,7 +19,7 @@ export class IconsService {
       return;
     }
 
-    const localeDirection = getLocaleDirection(this._locale);
+    const localeDirection = this._directionality?.value || 'ltr';
 
     Object.keys(this.icons).forEach(iconName => {
       // Ajustar  iconos RTL

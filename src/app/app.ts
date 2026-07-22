@@ -6,13 +6,13 @@ import {
   NgRibbonContextComponent,
   NgRibbonTabComponent,
   NgRibbonGroupComponent,
-  NgRibbonSettings
+  NgRibbonSettings,
+  SplitButtonComponent,
+  SymbolListComponent,
+  IconsService
 } from './ng-ribbon/src/public-api';
 
 import { ColorSketchModule } from 'ngx-color/sketch';
-import { SplitButtonComponent } from './components/split-button.component';
-import { SymbolListComponent } from './components/symbol-list.component';
-import { IconsService } from './components/icons.service';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
