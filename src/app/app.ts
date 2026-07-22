@@ -6,8 +6,15 @@ import {
   NgRibbonContextComponent,
   NgRibbonTabComponent,
   NgRibbonGroupComponent,
-  NgRibbonSettings
+  NgRibbonSettings,
+  SplitButtonComponent,
+  SymbolListComponent,
+  IconsService
 } from './ng-ribbon/src/public-api';
+
+import { ColorSketchModule } from 'ngx-color/sketch';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-root',
@@ -19,7 +26,12 @@ import {
     NgRibbonComponent,
     NgRibbonContextComponent,
     NgRibbonTabComponent,
-    NgRibbonGroupComponent
+    NgRibbonGroupComponent,
+    ColorSketchModule,
+    SplitButtonComponent,
+    SymbolListComponent,
+    MatIconModule,
+    MatTooltipModule
   ]
 })
 export class App {
@@ -28,6 +40,25 @@ export class App {
     useContexts: false,
     mouseWheelTabs: true   // Permet de changer d'onglet avec la molette
   });
+
+  public backColor = 'yellow';
+  public foreColor = 'red';
+
+  constructor(private iconsService: IconsService) {
+    this.iconsService.configure();
+  }
+
+  public onColorChange(type: 'back' | 'fore', event: any) {
+    const rgba = event.color.rgb;
+    const colorStr = `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`;
+    if (type === 'back') {
+      this.backColor = colorStr;
+      this.onAction('Couleur Fond: ' + colorStr);
+    } else {
+      this.foreColor = colorStr;
+      this.onAction('Couleur Texte: ' + colorStr);
+    }
+  }
 
   // Méthode onAction de la sandbox
   public onAction(actionName: string) {
