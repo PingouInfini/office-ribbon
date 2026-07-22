@@ -12,3 +12,4 @@ export {SplitButtonComponent} from "./lib/components/split-button/split-button.c
 export {SymbolListComponent} from "./lib/components/symbol-list/symbol-list.component";
 export {IconsService} from "./lib/services/icons.service";
 export {MenuTriggerDirective} from "./lib/directives/menu-trigger.directive";
+export {ColorPickerWithEyedropperComponent} from "./lib/components/color-picker-with-eyedropper/color-picker-with-eyedropper.component";

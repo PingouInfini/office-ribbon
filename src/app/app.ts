@@ -9,7 +9,8 @@ import {
   NgRibbonSettings,
   SplitButtonComponent,
   SymbolListComponent,
-  IconsService
+  IconsService,
+  ColorPickerWithEyedropperComponent
 } from './ng-ribbon/src/public-api';
 
 import { ColorSketchModule } from 'ngx-color/sketch';
@@ -31,7 +32,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     SplitButtonComponent,
     SymbolListComponent,
     MatIconModule,
-    MatTooltipModule
+    MatTooltipModule,
+    ColorPickerWithEyedropperComponent
   ]
 })
 export class App {

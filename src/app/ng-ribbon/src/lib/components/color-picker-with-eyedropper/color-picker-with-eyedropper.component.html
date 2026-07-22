@@ -1,0 +1,13 @@
+<div class="color-picker-wrapper">
+  <color-sketch 
+    [style.width.px]="width()"
+    [color]="localColor" 
+    [presetColors]="presetColors()" 
+    (onChangeComplete)="onSketchChange($event)">
+  </color-sketch>
+  
+  <!-- Affiché pour tous les navigateurs (Native sur Chrome, Custom Overlay sur Firefox) -->
+  <button class="eyedropper-btn" (click)="openEyeDropper()" title="Pipette">
+    <mat-icon svgIcon="eyedropper"></mat-icon>
+  </button>
+</div>

@@ -53,8 +53,11 @@
                     <div [style.background]="backColor"></div>
                   </div>
                   <ng-template #bgColorMenu>
-                    <color-sketch style="width: 220px" [color]="backColor" [presetColors]="presetColors"
-                      (onChangeComplete)="onColorChange('back', $event)"></color-sketch>
+                    <color-picker-with-eyedropper
+                      [color]="backColor"
+                      [presetColors]="presetColors"
+                      (colorChange)="onColorChange('back', $event)">
+                    </color-picker-with-eyedropper>
                   </ng-template>
                 </app-split-button>
 
@@ -65,8 +68,11 @@
                     <div [style.background]="foreColor"></div>
                   </div>
                   <ng-template #foreColorMenu>
-                    <color-sketch style="width: 220px" [color]="foreColor" [presetColors]="presetColors"
-                      (onChangeComplete)="onColorChange('fore', $event)"></color-sketch>
+                    <color-picker-with-eyedropper
+                      [color]="foreColor"
+                      [presetColors]="presetColors"
+                      (colorChange)="onColorChange('fore', $event)">
+                    </color-picker-with-eyedropper>
                   </ng-template>
                 </app-split-button>
               </div>
