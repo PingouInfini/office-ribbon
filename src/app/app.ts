@@ -44,6 +44,11 @@ export class App {
   public backColor = 'yellow';
   public foreColor = 'red';
 
+  public readonly presetColors = [
+    '#C00000', '#FF0000', '#FFC000', '#FFFF00', '#00B050', '#00B0F0', '#002060', '#7030A0',
+    '#FFFFFF', '#D8D8D8', '#BFBFBF', '#A5A5A5', '#7F7F7F', '#575757', '#262626', '#000000'
+  ];
+
   constructor(private iconsService: IconsService) {
     this.iconsService.configure();
   }
