@@ -16,17 +16,28 @@ export class ColorPickerWithEyedropperComponent {
   public color = input<string>('#000000');
   public presetColors = input<string[]>([]);
   public width = input<number>(220);
-  public captureTargetId = input<string>(''); 
+  public captureTargetId = input<string>('');
 
   // Événement émis lors du changement de couleur
   public colorChange = output<any>();
-  
+
   // Vérifie si l'API native EyeDropper (Chrome/Edge) est supportée
   public isNativeEyeDropperSupported = 'EyeDropper' in window;
   public localColor: string = '#000000';
+  public customColors: string[] = [];
 
   constructor(private iconsService: IconsService) {
     this.iconsService.configure();
+
+    const storedColors = localStorage.getItem('office-ribbon-custom-colors');
+    if (storedColors) {
+      try {
+        this.customColors = JSON.parse(storedColors);
+      } catch (e) {
+        this.customColors = [];
+      }
+    }
+
     // Synchronise la couleur locale avec l'input Angular
     effect(() => {
       this.localColor = this.color();
@@ -47,7 +58,7 @@ export class ColorPickerWithEyedropperComponent {
         // @ts-ignore
         const eyeDropper = new window.EyeDropper();
         const result = await eyeDropper.open();
-        
+
         setTimeout(() => { (window as any).isEyeDropperActive = false; }, 200);
 
         if (result?.sRGBHex) {
@@ -66,39 +77,22 @@ export class ColorPickerWithEyedropperComponent {
     (window as any).isEyeDropperActive = true;
 
     // Masque le curseur de la souris par défaut sur tout le document pendant la phase de sélection
-    const cursorStyleTag = document.createElement('style');
-    cursorStyleTag.id = 'eyedropper-cursor-hide';
-    cursorStyleTag.innerHTML = `*, *:hover { cursor: none !important; }`;
-    document.head.appendChild(cursorStyleTag);
+    document.body.classList.add('eyedropper-active');
 
     // 1. Création de l'overlay global bloquant les interactions de l'application sous-jacente
     const overlay = document.createElement('div');
-    overlay.style.cssText = `
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: 2147483645; background-color: rgba(0, 0, 0, 0.01); touch-action: none;
-    `;
+    overlay.className = 'eyedropper-fallback-overlay';
     document.body.appendChild(overlay);
 
     // 2. Création du badge d'information textuel en haut de l'écran
     const badge = document.createElement('div');
     badge.textContent = 'Préparation de la pipette...';
-    badge.style.cssText = `
-      position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
-      padding: 8px 18px; background-color: #1e1e1e; color: #ffffff;
-      border-radius: 20px; font-size: 13px; font-family: sans-serif;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 2147483647;
-      pointer-events: none; border: 1px solid rgba(255,255,255,0.2);
-    `;
+    badge.className = 'eyedropper-fallback-badge';
     document.body.appendChild(badge);
 
     // 3. Création de la loupe visuelle faisant office de curseur personnalisé
     const loupe = document.createElement('div');
-    loupe.style.cssText = `
-      position: fixed; width: 90px; height: 90px; border-radius: 50%;
-      border: 3px solid #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(0,0,0,0.3);
-      pointer-events: none; z-index: 2147483647; display: none;
-      overflow: hidden; background-color: #ffffff;
-    `;
+    loupe.className = 'eyedropper-fallback-loupe';
     const loupeCanvas = document.createElement('canvas');
     loupeCanvas.width = 90;
     loupeCanvas.height = 90;
@@ -116,14 +110,14 @@ export class ColorPickerWithEyedropperComponent {
       overlay.remove();
       badge.remove();
       loupe.remove();
-      document.getElementById('eyedropper-cursor-hide')?.remove();
+      document.body.classList.remove('eyedropper-active');
       (window as any).isEyeDropperActive = false;
     };
 
     try {
       const { domToCanvas } = await import('modern-screenshot');
-      const targetElement = this.captureTargetId() 
-        ? document.getElementById(this.captureTargetId()) || document.body 
+      const targetElement = this.captureTargetId()
+        ? document.getElementById(this.captureTargetId()) || document.body
         : document.body;
 
       // Capture de l'élément cible SANS exclure le composant de sélection lui-même, 
@@ -161,7 +155,7 @@ export class ColorPickerWithEyedropperComponent {
         const onMouseMove = (e: MouseEvent) => {
           e.stopPropagation();
           loupe.style.display = 'block';
-          
+
           // Positionne la loupe centrée exactement sur le curseur de la souris
           loupe.style.left = `${e.clientX - 45}px`;
           loupe.style.top = `${e.clientY - 45}px`;
@@ -175,7 +169,7 @@ export class ColorPickerWithEyedropperComponent {
             lCtx.clearRect(0, 0, 90, 90);
             try {
               lCtx.drawImage(canvas, sx, sy, zoomArea, zoomArea, 0, 0, 90, 90);
-            } catch {}
+            } catch { }
 
             // Dessin de la mire centrale sur la loupe
             lCtx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
@@ -192,7 +186,7 @@ export class ColorPickerWithEyedropperComponent {
 
           const { x, y } = getCanvasCoords(e);
           let hex: string | null = null;
-          
+
           if (x >= 0 && y >= 0 && x < canvas.width && y < canvas.height) {
             try {
               const pixel = ctx.getImageData(x, y, 1, 1).data;
@@ -257,18 +251,72 @@ export class ColorPickerWithEyedropperComponent {
     }
   }
 
-  // Convertit le code hexadécimal en RGB et émet l'événement vers le composant parent
-  private processAndEmitColor(hex: string) {
+  public parseToHex(colorString: string): string {
+    if (!colorString) return '#000000';
+    if (colorString.startsWith('#')) return colorString.toUpperCase();
+
+    if (colorString.startsWith('rgb')) {
+      const match = colorString.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)(?:\s*,\s*([\d.]+))?\s*\)/);
+      if (match) {
+        const r = parseInt(match[1], 10);
+        const g = parseInt(match[2], 10);
+        const b = parseInt(match[3], 10);
+        return '#' + [r, g, b].map(x => {
+          const h = x.toString(16);
+          return h.length === 1 ? '0' + h : h;
+        }).join('').toUpperCase();
+      }
+    }
+    return colorString.toUpperCase();
+  }
+
+  private processAndEmitColor(colorString: string) {
+    let r = 0, g = 0, b = 0, a = 1;
+    let hex = this.parseToHex(colorString);
+
+    if (hex.startsWith('#')) {
+      if (hex.length === 4) {
+        r = parseInt(hex.charAt(1) + hex.charAt(1), 16);
+        g = parseInt(hex.charAt(2) + hex.charAt(2), 16);
+        b = parseInt(hex.charAt(3) + hex.charAt(3), 16);
+      } else {
+        r = parseInt(hex.substring(1, 3), 16);
+        g = parseInt(hex.substring(3, 5), 16);
+        b = parseInt(hex.substring(5, 7), 16);
+      }
+    }
+
     this.localColor = hex;
-    const r = parseInt(hex.substring(1, 3), 16);
-    const g = parseInt(hex.substring(3, 5), 16);
-    const b = parseInt(hex.substring(5, 7), 16);
 
     this.colorChange.emit({
       color: {
         hex: hex,
-        rgb: { r, g, b, a: 1 }
+        rgb: { r, g, b, a }
       }
     });
+  }
+
+  public addCustomColor() {
+    if (this.customColors.length < 8 && this.localColor) {
+      this.customColors.push(this.parseToHex(this.localColor));
+      this.saveCustomColors();
+    }
+  }
+
+  public removeCustomColor(index: number, event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.customColors.splice(index, 1);
+    this.saveCustomColors();
+  }
+
+  public selectCustomColor(color: string, event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.processAndEmitColor(color);
+  }
+
+  private saveCustomColors() {
+    localStorage.setItem('office-ribbon-custom-colors', JSON.stringify(this.customColors));
   }
 }

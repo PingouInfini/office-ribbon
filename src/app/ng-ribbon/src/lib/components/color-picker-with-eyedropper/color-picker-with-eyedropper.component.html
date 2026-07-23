@@ -6,6 +6,18 @@
     (onChangeComplete)="onSketchChange($event)">
   </color-sketch>
   
+  <div class="custom-colors-row" [style.width.px]="width()">
+    <div class="custom-color-swatch" *ngFor="let color of customColors; let i = index" 
+         [style.background-color]="color" 
+         (click)="selectCustomColor(color, $event)"
+         (contextmenu)="removeCustomColor(i, $event)"
+         [title]="color + ' - clic droit pour supprimer'">
+    </div>
+    <div class="add-custom-color-btn" *ngIf="customColors.length < 8" (click)="addCustomColor()" title="Ajouter la couleur sélectionnée">
+      +
+    </div>
+  </div>
+
   <!-- Affiché pour tous les navigateurs (Native sur Chrome, Custom Overlay sur Firefox) -->
   <button class="eyedropper-btn" (click)="openEyeDropper()" title="Pipette">
     <mat-icon svgIcon="eyedropper"></mat-icon>
